@@ -55,8 +55,8 @@ from selenium.webdriver.support.wait import WebDriverWait
 #交互动作 将动作加入动作链中串行执行 Action Chains api
 
 #执行Js
-browser = webdriver.Chrome()
-browser.get('http://www.zhihu.com/explore')
+#browser = webdriver.Chrome()
+#browser.get('http://www.zhihu.com/explore')
 #browser.execute_script('window.scrollTo(0,document.body.scrollHeight)')#使用js完成下拉
 #browser.execute_script('alert("To Bottom")')#提示框
 
@@ -73,4 +73,52 @@ browser.get('http://www.zhihu.com/explore')
 #获取id，位置，标签名，大小
 #.id,.location,.tag_name,.size
 
+#等待
+#隐式等待：webdriver没有在DOM中找到元素，将会继续等待，超出设定时间后则会
+#抛出找不到元素。当查找元素没有立即出现的时候，隐式等待会等待一段时间在查找。
+#browser = webdriver.Chrome()
+#browser.implicitly_wait(10)
+#browser.get('http://www.zhihu.com/explore')
+#input = browser.find_element_by_class_name('zu-top-add-question')
+#print(input)
 
+#显示等待
+#browser = webdriver.Chrome()
+#browser.get('http://www.taobao.com')
+#wait = WebDriverWait(browser,10)
+#input = wait.until(EC.presence_of_element_located((By.ID,'q')))
+#button = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR,'bin-search')))
+#print(input,button)
+
+#前进后退
+#browser.back()
+#browser.forward()
+
+#Cookies
+#browser = webdriver.Chrome()
+#browser.get('http://www.zhihu.com/explore')
+#print(browser.get_cookies())
+#browser.add_cookie({'name':'name','domain':'www.zhihu.com','value':'germey'})
+#rint(browser.get_cookies())
+#browser.delete_all_cookies()
+#print(browser.get_cookies())
+
+#选项卡管理
+#browser = webdriver.Chrome()
+#browser.get('http://www.baidu.com')
+#browser.execute_script('window.open()')
+#print(browser.window_handles)
+#browser.switch_to_window(browser.window_handles[1])
+#browser.get('http://www.taobao.com')
+#browser.switch_to_window(browser.window_handles[0])
+#browser.get('http://python.org')
+
+#异常处理
+try:
+    brwoser.get('http://www.baidu.com')
+except TimeoutException:
+    print('Time Out')
+except NoSuchElementException:
+    print('No Element')
+finally:
+    browser.close()
