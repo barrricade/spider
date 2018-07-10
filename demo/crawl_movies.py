@@ -1,6 +1,6 @@
 #requests+Regular expression
 import requests
-from requests.exceptions import RequestException
+from requests.excep~tions import RequestException
 import re 
 import json
 import pandas as pd
