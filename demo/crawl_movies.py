@@ -1,12 +1,12 @@
 #requests+Regular expression
 import requests
-from requests.excep~tions import RequestException
+from requests.exceptions import RequestException
 import re 
 import json
 import pandas as pd
 import pymongo
 from pymongo import MongoClient
-
+from multiprocessing import Pool
 def get_one_url(url):
     try:
         headers = {'User-Agent':'Mozilla/5.0 (Windows NT 6.2; WOW64; rv:21.0) Gecko/20100101 Firefox/21.0'}
@@ -47,9 +47,9 @@ def main(offset):
     #for item in parse_one_page(html):
     #    print(item)
     data = pd.DataFrame(parse_one_page(html))
-    write_to_file(data)
-    import_to_mongodb(html)
-
+    #write_to_file(data)
+    #import_to_mongodb(html)
+    print(data)
 if __name__ == '__main__':
-    for i in range(10):
-        main(i*10)
+    pool = Pool()
+    pool.map(main,[i*10 for i in range(10)])

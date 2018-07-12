@@ -17,11 +17,14 @@ def get_one_page(offset,keyword):
         return None
     except RequestException:
         return None 
-def main():
-    html = get_one_page(0,'街拍')
-    data = json.load(html)
+def parse_page_index(html):
+    data = json.loads(html)
     if data and 'data' in data.keys():
         for item in data.get('data'):
             yield item.get('article_url')
+def main():
+    html = get_one_page(0,'街拍')
+    for url in parse_page_index(html):
+        print(url)
 if __name__ == '__main__':
     main()
